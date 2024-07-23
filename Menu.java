@@ -1,5 +1,3 @@
-import java.util.Arrays;
-import java.util.List;
 import java.util.Scanner;
 
 public class Menu {
@@ -9,10 +7,19 @@ public class Menu {
     private static String input = "";
 
     public static String Main() {
-        @SuppressWarnings("unchecked")
-        List<String> validMainMenuOptions = (List<String>) Config.arrays.get("ValidMainMenuOptions");
+        String [] validMainMenuOptions = (String []) Config.arrays.get("ValidMainMenuOptions");
 
-        String[] menuOptions = {"1. Bubble Sort", "2. Binary Search", "-1. Exit"};
+        String[] menuOptions = {"1. Sorts", "2. Binary Search", "-1. Exit"};
+
+        input = MenuTemplate(menuOptions, validMainMenuOptions);
+        
+        return input;
+    }
+
+    public static String Sorts(){
+        String [] validMainMenuOptions = {"1","2"};
+
+        String[] menuOptions = {"1. Bubble", "2. Selection"};
 
         input = MenuTemplate(menuOptions, validMainMenuOptions);
         
@@ -20,10 +27,9 @@ public class Menu {
     }
 
     public static String GetArrayType() {
+        String [] validMenuOptions = {"1","2"};
 
         String[] menuOptions = {"1. String", "2. Integer"};
-
-        List<String> validMenuOptions = Arrays.asList("1","2");
 
         input = MenuTemplate(menuOptions, validMenuOptions);
 
@@ -39,7 +45,7 @@ public class Menu {
         return input;
     }
 
-    private static String MenuTemplate(String[] menuOptions, List<String> validMenuoptions){
+    private static String MenuTemplate(String[] menuOptions, String [] validMenuoptions){
         StringBuilder sbf = new StringBuilder("Please select the number which represents your option.\n\n");
         
         for(String option : menuOptions){
@@ -54,7 +60,13 @@ public class Menu {
         return input;
     }
 
-    public static Boolean IsValidInput(String input, List<String> validOptions){
-        return validOptions.contains(input);
+    public static Boolean IsValidInput(String input, String [] validOptions){
+        for (String option : validOptions) {
+            if(option.equals(input)){
+                return true;
+            }
+        }
+
+        return false;
     }
 }

@@ -1,71 +1,51 @@
 import java.util.Arrays;
-import java.util.List;
 
-public class BubbleSort {
-    static private Integer timesRan;
-    static private Boolean sorted;
+public class BubbleSort extends Sort {
 
-    @SuppressWarnings("unchecked")
-    public static void run() {
-        String arrayType = Menu.GetArrayType();
-
-        var items = Config.arrays.get(arrayType);
-
-        var testItem = items.get(0);
-
-        System.out.println("Starting list... \n\n" + items.toString());
-
-        if(testItem instanceof Integer){
-            IntegerSort((List<Integer>) items);
-        }
-        else{
-            StringSort((List<String>) items);
-        }
-
+    public static void Sort() {
+        BubbleSort.Run(items -> {
+            IntegerSort((Integer[]) items);
+            return null; // Since IntegerSort returns void, we return null here
+        }, items -> {
+            StringSort((String[]) items);
+            return null; // Similarly, StringSort returns void, so we return null here
+        });
     }
 
-    private static void IntegerSort(List<Integer> items) {
+    private static void IntegerSort(Integer [] items) {
         timesRan = 0;
         sorted = false;
 
         while(!sorted){
             sorted = true;
-            for (Integer i = 0; i < items.size()-1; i++) {
-                if(items.get(i) > items.get(i+1)){
-                    items = (List<Integer>) Swap(i, i+1, items.toArray());
+            for (int i = 0; i < items.length-1; i++) {
+                if(items[i] > items[i+1]){
+                    Swap(i, i+1, items);
+                    sorted=false;
+                    timesRan++;
+                }
+            }
+        }
+    
+        System.out.println("Times ran: " + timesRan + "\nFinal Result: " + Arrays.toString(items));
+    }
+
+    private static void StringSort(String [] items) {
+        timesRan = 0;
+        sorted = false;
+
+        while(!sorted){
+            sorted = true;
+            for (Integer i = 0; i < items.length-1; i++) {
+                if(items[i].compareTo(items[i+1]) > 0){
+                    Swap(i, i+1, items);
                     sorted=false;
                     timesRan++;
                 }
             }
         }
         
-        System.out.println("Times ran: " + timesRan + "\nFinal Result: " + items.toString());
-    }
-
-    private static void StringSort(List<String> items) {
-        timesRan = 0;
-        sorted = false;
-
-        while(!sorted){
-            sorted = true;
-            for (Integer i = 0; i < items.size()-1; i++) {
-                if(items.get(i).compareTo(items.get(i+1)) > 0){
-                    items = (List<String>) Swap(i, i+1, items.toArray());
-                    sorted=false;
-                    timesRan++;
-                }
-            }
-        }
+        System.out.println("Times ran: " + timesRan + "\nFinal Result: " + Arrays.toString(items));
         
-        System.out.println("Times ran: " + timesRan + "\nFinal Result: " + items.toString());
-        
-    }
-
-    private static List<?> Swap(Integer smallerIndex, Integer largerIndex, Object[] items){
-        var tmp = items[smallerIndex];
-        items[smallerIndex] = items[largerIndex];
-        items[largerIndex] = tmp;
-
-        return Arrays.asList(items);
     }
 }

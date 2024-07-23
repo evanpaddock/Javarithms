@@ -1,14 +1,12 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-import java.util.Arrays;
 import java.util.Hashtable;
-import java.util.List;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
 public class Config {
 
-    public static Hashtable<String, List<?>> arrays;
+    public static Hashtable<String, Object []> arrays;
     
     public static void init() {
         try {
@@ -18,12 +16,12 @@ public class Config {
             String data = myReader.nextLine();
             String[] splitData = data.split("#");
             
-            List<Integer> arrayOne = Arrays.asList(Stream.of(splitData[0].split(",")).map(Integer::valueOf).toArray(Integer[]::new));
+            Integer [] arrayOne = Stream.of(splitData[0].split(",")).map(Integer::valueOf).toArray(Integer[]::new);
 
-            arrays = new Hashtable<String, List<?>>();
+            arrays = new Hashtable<String, Object []>();
             arrays.put("Integer", arrayOne);
-            arrays.put("String", Arrays.asList(splitData[1].split(" ")));
-            arrays.put("ValidMainMenuOptions",  Arrays.asList(splitData[2].split(" ")));
+            arrays.put("String", splitData[1].split(" "));
+            arrays.put("ValidMainMenuOptions", splitData[2].split(" "));
 
             myReader.close();
 
