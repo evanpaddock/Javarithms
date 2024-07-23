@@ -5,10 +5,10 @@ public class SelectionSort extends Sort{
     public static void Sort() {
         BubbleSort.Run(items -> {
             IntegerSort((Integer[]) items);
-            return null; // Since IntegerSort returns void, we return null here
+            return null;
         }, items -> {
             StringSort((String[]) items);
-            return null; // Similarly, StringSort returns void, so we return null here
+            return null;
         });
     }
 

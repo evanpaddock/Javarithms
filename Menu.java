@@ -17,9 +17,9 @@ public class Menu {
     }
 
     public static String Sorts(){
-        String [] validMainMenuOptions = {"1","2"};
+        String [] validMainMenuOptions = {"1","2", "3"};
 
-        String[] menuOptions = {"1. Bubble", "2. Selection"};
+        String[] menuOptions = {"1. Bubble", "2. Selection", "3. Merge"};
 
         input = MenuTemplate(menuOptions, validMainMenuOptions);
         

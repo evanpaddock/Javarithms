@@ -24,6 +24,9 @@ public class Router {
             case "2":
                 SelectionSort.Sort();
                 break;
+            case "3":
+                MergeSort.Sort();
+                break;
             default:
                 break;
         }
