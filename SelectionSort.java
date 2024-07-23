@@ -3,20 +3,13 @@ import java.util.Arrays;
 public class SelectionSort extends Sort{
 
     public static void Sort() {
-        String arrayType = Menu.GetArrayType();
-
-        var items = Config.arrays.get(arrayType);
-
-        var testItem = items[0];
-
-        System.out.println("Starting list... \n\n" + Arrays.toString(items));
-
-        if(testItem instanceof Integer){
-            IntegerSort((Integer []) items);
-        }else{
-            StringSort((String []) items);
-        }
-
+        BubbleSort.Run(items -> {
+            IntegerSort((Integer[]) items);
+            return null; // Since IntegerSort returns void, we return null here
+        }, items -> {
+            StringSort((String[]) items);
+            return null; // Similarly, StringSort returns void, so we return null here
+        });
     }
 
     public static void IntegerSort(Integer [] items) {
@@ -26,8 +19,8 @@ public class SelectionSort extends Sort{
             int smallestIndex = i;
             timesRan++;
 
-            for (int j = 0; j < items.length; j++) {
-                if(items[smallestIndex] < items[j]){
+            for (int j = i+1; j < items.length; j++) {
+                if(items[smallestIndex] > items[j]){
                     smallestIndex = j;
                 }
             }
@@ -35,7 +28,7 @@ public class SelectionSort extends Sort{
             if(smallestIndex != i){Swap(i, smallestIndex, items);}
         }
         
-        System.out.println("Times ran: " + timesRan + "\nFinal Result: " + items.toString());
+        System.out.println("Times ran: " + timesRan + "\nFinal Result: " + Arrays.toString(items));
     }
 
     public static void StringSort(String [] items) {
@@ -45,7 +38,7 @@ public class SelectionSort extends Sort{
             int smallestIndex = i;
             timesRan++;
 
-            for (int j = 0; j < items.length; j++) {
+            for (int j = i+1; j < items.length; j++) {
                 if(items[smallestIndex].compareTo(items[j]) > 0){
                     smallestIndex = j;
                 }
@@ -54,6 +47,6 @@ public class SelectionSort extends Sort{
             if(smallestIndex != i){Swap(i, smallestIndex, items);}
         }
         
-        System.out.println("Times ran: " + timesRan + "\nFinal Result: " + items.toString());
+        System.out.println("Times ran: " + timesRan + "\nFinal Result: " + Arrays.toString(items));
     }
 }

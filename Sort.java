@@ -23,6 +23,7 @@ public abstract class Sort {
     }
 
     public static void Swap(int unfavoredIndex, int favoredIndex, Object[] items){
+        System.out.println(Arrays.toString(items));
         Object temp = items[unfavoredIndex];
         items[unfavoredIndex] = items[favoredIndex];
         items[favoredIndex] = temp;
